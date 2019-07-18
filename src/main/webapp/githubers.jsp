@@ -10,14 +10,15 @@
 <html>
 <%@include file="header.jsp"%>
 <head>
-    <title>Githubers</title>
+    <title >Githubers</title>
 </head>
 <body>
-<H1 class="text-danger">Githubers list</H1>
+<H1 class="text-danger" class="text-center">Githubers list</H1>
 <div class="table-responsive">
 <table class="table table-bordered  table-striped">
-    <tr>
-        <th scope="col">ID</th>
+    <thead class="thead-dark">
+    <tr class="text-center" >
+        <th  scope="col">ID</th>
         <th scope="col"> Name</th>
         <th scope="col">Email</th>
         <th scope="col">Login</th>
@@ -25,7 +26,7 @@
     </tr>
 
     <c:forEach items="${gitlist}" var="agit">
-        <tr  scope="row ">
+        <tr class="text-center" scope="row ">
             <td>${agit.id}</td>
             <td><c:out value="${agit.name}" /></td>
             <td><c:out value="${agit.email}" /></td>

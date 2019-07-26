@@ -4,6 +4,7 @@ import fr.wildcodeschool.githubtracker.dao.DumbGithuberDAO;
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
 import fr.wildcodeschool.githubtracker.model.Githuber;
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,14 +22,18 @@ import org.slf4j.LoggerFactory;
 public class GithubersServlet extends HttpServlet {
 
     private final Logger slf4jLogger = LoggerFactory.getLogger(GithubersServlet.class);
-    private GithubersService githuberServObj=null;
 
+    // Demande au serveur d'appli de créer GithubersService pour nous
+    @Inject  private GithubersService githuberServObj;
+
+/*  Inutile, puisque  GithubersService va etre injecté par le serveur d'appli.
     @Override
     public void init() throws ServletException {
         super.init();
         githuberServObj= new GithubersService( );
         //githuberServObj= new GithubersService(new GithuberDAO());
     }
+*/
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

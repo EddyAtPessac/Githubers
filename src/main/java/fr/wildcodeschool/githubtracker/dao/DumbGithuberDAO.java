@@ -2,10 +2,12 @@ package fr.wildcodeschool.githubtracker.dao;
 
 import fr.wildcodeschool.githubtracker.model.Githuber;
 
+import javax.enterprise.context.Dependent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@Dependent // Maintient cette classe tant que GithubersService en a besoin
 public class DumbGithuberDAO implements GithuberDAO{
     @Override
     public List<Githuber> getGithubers() {

@@ -6,24 +6,43 @@ import fr.wildcodeschool.githubtracker.model.Githuber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
+
+@Dependent   // Maintient cette classe tant que la servlet en a besoin
 public class GithubersService {
     private final Logger slf4jLogger = LoggerFactory.getLogger(GithubersService.class);
-    GithuberDAO gitDao;
 
+
+    private GithuberDAO gitDao;
+
+    // Grace au inject, le serveur d'appli va instancier l'argument (Une interface),
+    // donc il cherche ensuite la classe qui implemente cette interface. Comme DumbGithuberDAO
+    // est la seule qui le fait, elle est créée dans la foulée.
+
+
+    @Inject
     public GithubersService(GithuberDAO gitDao) {
         this.gitDao = gitDao;
     }
 
-    public GithubersService() {
-        this.gitDao=new DumbGithuberDAO();
-    }
+    /*  Remplacé par le contructeur avec inject
 
+
+        public GithubersService() {
+            this.gitDao=new DumbGithuberDAO();
+        }
+
+   }
+
+
+    */
     public List<Githuber> getAllGithubers() {
         return gitDao.getGithubers() ;
     }

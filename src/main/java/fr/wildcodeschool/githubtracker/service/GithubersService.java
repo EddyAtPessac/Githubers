@@ -2,6 +2,7 @@ package fr.wildcodeschool.githubtracker.service;
 
 import fr.wildcodeschool.githubtracker.dao.DumbGithuberDAO;
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
+import fr.wildcodeschool.githubtracker.dao.MemoryGithuberDAO;
 import fr.wildcodeschool.githubtracker.model.Githuber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,16 +20,12 @@ import static java.util.stream.Collectors.toList;
 public class GithubersService {
     private final Logger slf4jLogger = LoggerFactory.getLogger(GithubersService.class);
 
-
     private GithuberDAO gitDao;
-
     // Grace au inject, le serveur d'appli va instancier l'argument (Une interface),
     // donc il cherche ensuite la classe qui implemente cette interface. Comme DumbGithuberDAO
     // est la seule qui le fait, elle est créée dans la foulée.
-
-
     @Inject
-    public GithubersService(GithuberDAO gitDao) {
+    public GithubersService(MemoryGithuberDAO gitDao) {
         this.gitDao = gitDao;
     }
 

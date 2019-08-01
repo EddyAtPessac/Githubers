@@ -21,8 +21,8 @@ import org.slf4j.LoggerFactory;
 @WebServlet(name = "GithubersServlet", urlPatterns = {"/githubers"})
 public class GithubersServlet extends HttpServlet {
 
-    private final Logger slf4jLogger = LoggerFactory.getLogger(GithubersServlet.class);
-
+    //private final Logger slf4jLogger = LoggerFactory.getLogger(GithubersServlet.class);
+    private final Logger slf4jLogger = LoggerFactory.getLogger("MyLog");
     // Demande au serveur d'appli de créer GithubersService pour nous
     @Inject  private GithubersService githuberServObj;
 
@@ -41,12 +41,15 @@ public class GithubersServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        slf4jLogger.info("************* Do get servlet ***************");
+        for (Githuber gt : githuberServObj.getAllGithubers() ) {
+            slf4jLogger.info(gt.getName());
+        };
         request.setAttribute("gitlist", githuberServObj.getAllGithubers());
-        for (Githuber gt : githuberServObj.getAllGithubers() ) {; }
             //slf4jLogger.info(githuberServObj.getAllGithubers().get(2).getName().toString());
-        Githuber toto= githuberServObj.getGithuber("edylog");
-        String name= (toto!=null) ? toto.getName().toString() : "Not found";
-        slf4jLogger.info(name);
+        //Githuber toto= githuberServObj.getGithuber("edylog");
+        //String name= (toto!=null) ? toto.getName().toString() : "Not found";
+        //
 
         request.getRequestDispatcher("/githubers.jsp").forward(request,response);
     }

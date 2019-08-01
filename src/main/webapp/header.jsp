@@ -33,7 +33,7 @@
                 <a class="nav-link" href="githubers">Githubers list</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Githubber management</a>
+                <a class="nav-link" href="track">Githubber track</a>
             </li>
 
         </ul>

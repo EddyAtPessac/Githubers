@@ -1,8 +1,7 @@
 package fr.wildcodeschool.githubtracker.service;
 
-import fr.wildcodeschool.githubtracker.dao.DumbGithuberDAO;
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
-import fr.wildcodeschool.githubtracker.dao.MemoryGithuberDAO;
+import fr.wildcodeschool.githubtracker.dao.InMemory;
 import fr.wildcodeschool.githubtracker.model.Githuber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 
 @Dependent   // Maintient cette classe tant que la servlet en a besoin
@@ -25,7 +21,7 @@ public class GithubersService {
     // donc il cherche ensuite la classe qui implemente cette interface. Comme DumbGithuberDAO
     // est la seule qui le fait, elle est créée dans la foulée.
     @Inject
-    public GithubersService(MemoryGithuberDAO gitDao) {
+    public GithubersService( @InMemory GithuberDAO gitDao) {
         this.gitDao = gitDao;
     }
 

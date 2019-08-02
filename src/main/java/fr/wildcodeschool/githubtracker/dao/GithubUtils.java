@@ -6,6 +6,8 @@ import fr.wildcodeschool.githubtracker.model.Githuber;
 import javax.inject.Inject;
 import java.net.URL;
 
+// Cette classe permet d'ajouter la methode parseGithuber() aux classes qui implementent GitHuberDAO
+
 public class GithubUtils {
 
     static final String GITURL="https://api.github.com/users/";

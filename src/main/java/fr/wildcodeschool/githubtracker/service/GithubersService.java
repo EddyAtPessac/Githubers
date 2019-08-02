@@ -1,5 +1,6 @@
 package fr.wildcodeschool.githubtracker.service;
 
+import fr.wildcodeschool.githubtracker.dao.GithubUtils;
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
 import fr.wildcodeschool.githubtracker.dao.InMemory;
 import fr.wildcodeschool.githubtracker.model.Githuber;
@@ -18,36 +19,31 @@ public class GithubersService {
 
     private GithuberDAO gitDao;
     // Grace au inject, le serveur d'appli va instancier l'argument (Une interface),
-    // donc il cherche ensuite la classe qui implemente cette interface. Comme DumbGithuberDAO
-    // est la seule qui le fait, elle est créée dans la foulée.
+    // donc il cherche ensuite la classe qui implemente cette interface. Comme il y a
+    // 2 implementation de cette interface, on a créé l'annotation InMemory pour colorer
+    // DumbGithuberDAO que l'on veut utiliser.
+
     @Inject
     public GithubersService( @InMemory GithuberDAO gitDao) {
         this.gitDao = gitDao;
     }
-
-    /*  Remplacé par le contructeur avec inject
-
-
-        public GithubersService() {
-            this.gitDao=new DumbGithuberDAO();
-        }
-
-   }
+    @Inject
+    private @InMemory GithuberDAO memGithuber;
+    @Inject
+    private GithubUtils gutil;  //Pour parseGithuber() Inject obligé en private sinon pb...
 
 
-    */
     public List<Githuber> getAllGithubers() {
         return gitDao.getGithubers() ;
     }
 
     public void track(String login) {
-        // TODO: track githuber
+        memGithuber.saveGithuber(gutil.parseGithuber(login));
     }
 
     public Githuber getGithuber(String login) {
         Githuber myGit=null;
         Stream<Githuber>  myGitStream= gitDao.getGithubers().stream();
-
 /*
         try {
             myGit = (Githuber) myGitStream.filter(gh -> gh.getLogin().equals(login))

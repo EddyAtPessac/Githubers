@@ -3,6 +3,7 @@ package fr.wildcodeschool.githubtracker.controller;
 import fr.wildcodeschool.githubtracker.dao.GithubUtils;
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
 import fr.wildcodeschool.githubtracker.dao.InMemory;
+import fr.wildcodeschool.githubtracker.service.GithubersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,17 +19,15 @@ import java.io.IOException;
 public class TrackServlet extends HttpServlet {
 
     private final Logger slf4jLogger = LoggerFactory.getLogger("MyLog");
+    @Inject
+    GithubersService gitserv;
     // Demande au serveur d'appli de créer GithubersService pour nous
-    @Inject
-    private @InMemory GithuberDAO memGithuber;
-    @Inject
-    private GithubUtils gutil;  //Inject obligé en private sinon pb...
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String reqLog= (String) request.getParameter("login");   // En post on recois des parametres... En get on envoie des attributs
         slf4jLogger.info("Get "+ reqLog+" parameter");
-        memGithuber.saveGithuber(gutil.parseGithuber(reqLog));
+        gitserv.track(reqLog);
+        //memGithuber.saveGithuber(gutil.parseGithuber(reqLog));
         response.sendRedirect("githubers");  // TODO ask Fabien "githuber vs /tracklogform"
     }
 

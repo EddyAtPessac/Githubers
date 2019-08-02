@@ -32,7 +32,9 @@ public class MemoryGithuberDAO implements GithuberDAO {
     private void postConstructFonction() {
 
             slf4jLogger.info("PostConstruct called");
-            String[] logs={"EddyAtPessac","veropichon","smelldat"};
+            String[] logs={"EddyAtPessac","veropichon","smelldat",
+                            "Octopussyzz","athanyl","alexandrahilary","ClementLecomte"
+                            };
             for (String log : logs ) {
                 gitHuberMap.put(log, gutil.parseGithuber(log));
             }

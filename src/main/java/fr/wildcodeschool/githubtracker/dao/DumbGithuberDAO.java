@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Dependent // Maintient cette classe tant que GithubersService en a besoin
-public class DumbGithuberDAO implements GithuberDAO{
+public class DumbGithuberDAO /*implements GithuberDAO*/{
 
     public DumbGithuberDAO() {
     }

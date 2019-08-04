@@ -26,15 +26,6 @@ public class GithubersServlet extends HttpServlet {
     // Demande au serveur d'appli de créer GithubersService pour nous
     @Inject  private GithubersService githuberServObj;
 
-/*  Inutile, puisque  GithubersService va etre injecté par le serveur d'appli.
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        githuberServObj= new GithubersService( );
-        //githuberServObj= new GithubersService(new GithuberDAO());
-    }
-*/
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

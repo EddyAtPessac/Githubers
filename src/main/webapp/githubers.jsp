@@ -18,7 +18,8 @@
 <table class="table table-bordered  table-striped">
     <thead class="thead-dark">
     <tr class="text-center" >
-        <th  scope="col">ID</th>
+        <th scope="col">Untrack</th>
+        <th  scope="col">gitId</th>
         <th scope="col"> Name</th>
         <th scope="col">Email</th>
         <th scope="col">Login</th>
@@ -27,7 +28,8 @@
 
     <c:forEach items="${gitlist}" var="agit">
         <tr class="text-center" scope="row ">
-            <td>${agit.id}</td>
+            <td><button type="button" class="btn btn-outline-info"  onclick="window.location.href = '\gitkiller?Id=${agit.id}'">Untrack</button></td>
+            <td>${agit.gitId}</td>
             <td><c:out value="${agit.name}" /></td>
             <td><c:out value="${agit.email}" /></td>
             <td><c:out value="${agit.login}" /></td>

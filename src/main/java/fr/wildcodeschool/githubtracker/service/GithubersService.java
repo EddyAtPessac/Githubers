@@ -1,8 +1,7 @@
 package fr.wildcodeschool.githubtracker.service;
 
-import fr.wildcodeschool.githubtracker.dao.GithubUtils;
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
-import fr.wildcodeschool.githubtracker.dao.InMemory;
+import fr.wildcodeschool.githubtracker.dao.InDatabase;
 import fr.wildcodeschool.githubtracker.model.Githuber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,31 +19,46 @@ public class GithubersService {
     private GithuberDAO gitDao;
     // Grace au inject, le serveur d'appli va instancier l'argument (Une interface),
     // donc il cherche ensuite la classe qui implemente cette interface. Comme il y a
-    // 2 implementation de cette interface, on a créé l'annotation InMemory pour colorer
+    // 3 implementations de cette interface, on a créé l'annotation InDatabase pour colorer
     // DumbGithuberDAO que l'on veut utiliser.
 
     @Inject
-    public GithubersService( @InMemory GithuberDAO gitDao) {
+    public GithubersService( @InDatabase  GithuberDAO gitDao) {
         this.gitDao = gitDao;
     }
-    @Inject
-    private @InMemory GithuberDAO memGithuber;
-    @Inject
+     @Inject
     private GithubUtils gutil;  //Pour parseGithuber() Inject obligé en private sinon pb...
 
-
     public List<Githuber> getAllGithubers() {
+
         return gitDao.getGithubers() ;
     }
 
-    public void track(String login) {
-        memGithuber.saveGithuber(gutil.parseGithuber(login));
+    // New git if found, null else
+    public Githuber track(String login) {
+        Githuber git= gutil.parseGithuber(login);
+        if (null != git) {
+            gitDao.saveGithuber(git);
+        }
+        return(git);
+    }
+
+    public void unTrack(String login) {
+
+        Githuber git= getGithuber(login);
+        if (null != git) {
+            gitDao.deleteGithuber(git.getgitId());
+        }
     }
 
     public Githuber getGithuber(String login) {
         Githuber myGit=null;
         Stream<Githuber>  myGitStream= gitDao.getGithubers().stream();
-/*
+        myGit = (Githuber) myGitStream.filter(gh -> gh.getLogin().equals(login))
+                .findAny()
+                .orElse(null);
+
+        /*
         try {
             myGit = (Githuber) myGitStream.filter(gh -> gh.getLogin().equals(login))
                     .collect(Collectors.toList()).get(0);
@@ -53,14 +67,7 @@ public class GithubersService {
             e.printStackTrace();
         }
 */
-        myGit = (Githuber) myGitStream.filter(gh -> gh.getLogin().equals(login))
-                .findAny()
-                .orElse(null);
-
-        //collect(Collectors.toSet());
-
         return myGit;
-
     }
 }
 

@@ -1,8 +1,6 @@
 package fr.wildcodeschool.githubtracker.controller;
 
-import fr.wildcodeschool.githubtracker.dao.GithubUtils;
-import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
-import fr.wildcodeschool.githubtracker.dao.InMemory;
+import fr.wildcodeschool.githubtracker.model.Githuber;
 import fr.wildcodeschool.githubtracker.service.GithubersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +24,14 @@ public class TrackServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String reqLog= (String) request.getParameter("login");   // En post on recois des parametres... En get on envoie des attributs
         slf4jLogger.info("Get "+ reqLog+" parameter");
-        gitserv.track(reqLog);
-        //memGithuber.saveGithuber(gutil.parseGithuber(reqLog));
-        response.sendRedirect("githubers");  // TODO ask Fabien "githuber vs /tracklogform"
+        Githuber git= gitserv.track(reqLog);
+        if (git != null ) {
+            response.sendRedirect("githubers");  // Because sendRedirect"githuber vs /tracklogform"
+        }
+        else {
+            request.setAttribute("gitlog",reqLog);  // Tente de faire afficher inconnu
+            request.getRequestDispatcher("/tracklogform.jsp").forward(request,response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

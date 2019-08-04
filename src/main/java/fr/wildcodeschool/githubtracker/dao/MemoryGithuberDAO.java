@@ -1,6 +1,7 @@
 package fr.wildcodeschool.githubtracker.dao;
 
 import fr.wildcodeschool.githubtracker.model.Githuber;
+import fr.wildcodeschool.githubtracker.service.GithubUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +22,7 @@ public class MemoryGithuberDAO implements GithuberDAO {
     private final Logger slf4jLogger = LoggerFactory.getLogger(MemoryGithuberDAO.class);
     static final String GITURL="https://api.github.com/users/";
 
-    //@Inject private ObjectMapper om;
+
     public MemoryGithuberDAO() {
         gitHuberMap=new HashMap<>();
     }
@@ -41,9 +42,13 @@ public class MemoryGithuberDAO implements GithuberDAO {
     }
 
 
+    public void deleteGithuber(String gitId) {
+        // TODO delete githuber gitId from list;
+    }
 
 
-    @Override
+
+        @Override
     public List<Githuber> getGithubers() {
         List <Githuber> myList=new ArrayList<>(gitHuberMap.values());
         return myList;

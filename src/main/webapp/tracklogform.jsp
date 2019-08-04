@@ -15,17 +15,18 @@
     </head>
 <body>
 
-<c:if test = "${gitlog}!=null">
-    <p> ${gitlog} is not found. try again </p>
+
+<c:if test = "${not empty gitlog}">
+    <p class="text-primary"> login "${gitlog}" not found. Enter new login again </p>
 </c:if>
 
 <form method="post" >
 
     <div class="form-group">
-        <label for="login">Github loggin</label>
-        <input type="text" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Enter log">
+        <label for="login">Github login</label>
+        <input type="text" class="form-control" name="login" id="login" aria-describedby="emailHelp" placeholder="Enter login">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Track</button>
 <%--
 
     <p>

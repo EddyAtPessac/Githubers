@@ -29,7 +29,7 @@ public class TrackServlet extends HttpServlet {
             response.sendRedirect("githubers");  // Because sendRedirect"githuber vs /tracklogform"
         }
         else {
-            request.setAttribute("gitlog",reqLog);  // Tente de faire afficher inconnu
+            request.setAttribute("gitlog",reqLog);  // try to display  "log inconnu"
             request.getRequestDispatcher("/tracklogform.jsp").forward(request,response);
         }
     }

@@ -62,8 +62,9 @@ public class DBGithuberDAO implements GithuberDAO  {
 
     public void deleteGithuber(String gitId) {
 
-            String strGetId="SELECT id FROM `githuber` WHERE gitId = ?;";
-            String strKillGit="DELETE FROM `githuber` WHERE `id` = ? ;";
+            String strGetId="SELECT id FROM `githuber` WHERE github_id = ?;";
+            String strKillGit="DELETE FROM `githuber` WHERE `id` = ";
+            Integer id=null;
             DbConnectionFactory dbFactory= new DbConnectionFactory();
             Connection cnx = dbFactory.openConnection();
             try {
@@ -72,10 +73,12 @@ public class DBGithuberDAO implements GithuberDAO  {
                     pStatement = (PreparedStatement) cnx.prepareStatement(strGetId);
                     pStatement.setString(1,gitId);
                     resultat = pStatement.executeQuery();
-                    Integer id= resultat.getInt("id");
+                    if (resultat.next()) {
+                        id = resultat.getInt("id");
+                    }
                     // Delete by id
-                    pStatement = (PreparedStatement) cnx.prepareStatement(strKillGit);
-                    pStatement.setInt(1, id);
+                    pStatement = (PreparedStatement) cnx.prepareStatement(strKillGit+ id +";");
+                    //pStatement.setInt(1, id);
                     pStatement.executeUpdate();
                 }
             } catch (SQLException e) {

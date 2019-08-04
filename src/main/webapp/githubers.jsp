@@ -28,7 +28,7 @@
 
     <c:forEach items="${gitlist}" var="agit">
         <tr class="text-center" scope="row ">
-            <td><button type="button" class="btn btn-outline-info"  onclick="window.location.href = '\gitkiller?Id=${agit.id}'">Untrack</button></td>
+            <td><button type="button" class="btn btn-outline-info"  onclick="window.location.href = '\gitkiller?gitLog=${agit.login}'">Untrack</button></td>
             <td>${agit.gitId}</td>
             <td><c:out value="${agit.name}" /></td>
             <td><c:out value="${agit.email}" /></td>

@@ -33,7 +33,7 @@
             <td><c:out value="${agit.name}" /></td>
             <td><c:out value="${agit.email}" /></td>
             <td><c:out value="${agit.login}" /></td>
-            <td><c:out value="${agit.avatarUrl}" /></td>
+            <td> <img src=<c:out value="${agit.avatarUrl}" /> alt=<c:out value="${agit.avatarUrl}" /> height="42" width="42"> </td>
         </tr>
     </c:forEach>
 </table>

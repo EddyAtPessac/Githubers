@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//@slf4j  // Marche pas
 @WebServlet(name = "TrackServlet", urlPatterns = {"/track"})
 public class TrackServlet extends HttpServlet {
 

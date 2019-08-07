@@ -23,7 +23,7 @@ import java.util.Map;
 @InDatabase
 public class DBGithuberDAO implements GithuberDAO  {
 
-    @Resource(mappedName = "jdbc/myDB")
+    @Resource(lookup = "java:/jdbc/myDB")
     private DataSource myDB;
     //fr.wildcodeschool.githubtracker.dao/DBGithuberDAO/myDB
     private Map<String, Githuber> gitHuberMap=null; //new HashMap<>();
@@ -35,20 +35,23 @@ public class DBGithuberDAO implements GithuberDAO  {
     @Inject
     private GithubUtils gutil;  //Inject obligé en private sinon pb...
 
-    @Override
-    public List<Githuber> getGithubers() {
-        String strGetGithubers= "select `id`,`name`,`email`,`login`, `github_id`, `avatar_url` from `githuber` order by github_id;";
-        List <Githuber> myList=new ArrayList<>();
-        //DbConnectionFactory dbFactory= new DbConnectionFactory();  // Still used to close statement and resultat
-
-        Connection cnx = null;
+    private Connection getCnx() {
+        Connection cnx=null;
         try {
             cnx = myDB.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //dbFactory.openConnection();
-        try {
+        return cnx;
+    }
+
+    @Override
+    public List<Githuber> getGithubers() {
+        String strGetGithubers= "select `id`,`name`,`email`,`login`, `github_id`, `avatar_url` from `githuber` order by github_id;";
+        List <Githuber> myList=new ArrayList<>();
+        //DbConnectionFactory dbFactory= new DbConnectionFactory();  // Still used to close statement and resultat
+        Connection cnx = getCnx();
+         try {
             if (cnx != null) {
                 pStatement = (PreparedStatement) cnx.prepareStatement(strGetGithubers);
                 resultat = pStatement.executeQuery();
@@ -68,7 +71,7 @@ public class DBGithuberDAO implements GithuberDAO  {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-         //   dbFactory.closeConnection(resultat,pStatement,null);
+       //dbFactory.closeConnection(resultat,pStatement,null);
        return myList;
     }
 
@@ -77,8 +80,9 @@ public class DBGithuberDAO implements GithuberDAO  {
             String strGetId="SELECT id FROM `githuber` WHERE github_id = ?;";
             String strKillGit="DELETE FROM `githuber` WHERE `id` = ";
             Integer id=null;
-            DbConnectionFactory dbFactory= new DbConnectionFactory();
-            Connection cnx = dbFactory.openConnection();
+            //DbConnectionFactory dbFactory= new DbConnectionFactory();
+            //Connection cnx = dbFactory.openConnection();
+            Connection cnx = getCnx();
             try {
                 if (cnx != null) {
                     // Recup of id by gitId
@@ -96,7 +100,7 @@ public class DBGithuberDAO implements GithuberDAO  {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                dbFactory.closeConnection(null,pStatement,cnx);
+                ;//dbFactory.closeConnection(null,pStatement,cnx);
             }
         }
 
@@ -104,8 +108,9 @@ public class DBGithuberDAO implements GithuberDAO  {
         public void saveGithuber(Githuber git) {
             String strSetGithubers= "insert into `githuber` (`name`,`email`,`login`, `github_id`, `avatar_url`)"
                                     +" VALUES (?,?,?,?,?);";
-            DbConnectionFactory dbFactory= new DbConnectionFactory();
-            Connection cnx = dbFactory.openConnection();
+            //DbConnectionFactory dbFactory= new DbConnectionFactory();
+            //Connection cnx = dbFactory.openConnection();
+            Connection cnx = getCnx();
             try {
                 if (cnx != null) {
                     pStatement = (PreparedStatement) cnx.prepareStatement(strSetGithubers);
@@ -119,7 +124,7 @@ public class DBGithuberDAO implements GithuberDAO  {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                dbFactory.closeConnection(null,pStatement,cnx);
+                //dbFactory.closeConnection(null,pStatement,cnx);
             }
         }
 }

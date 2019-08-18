@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -28,6 +29,7 @@ public class GithubersService {
     }
      @Inject
     private GithubUtils gutil;  //Pour parseGithuber() Inject obligé en private sinon pb...
+
 
     public List<Githuber> getAllGithubers() {
 

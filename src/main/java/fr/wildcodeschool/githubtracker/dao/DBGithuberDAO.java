@@ -62,7 +62,7 @@ public class DBGithuberDAO implements GithuberDAO  {
                             resultat.getString("login"), resultat.getString("github_id"),
                             resultat.getString("avatar_url" )
                     );
-                    git.setId(resultat.getInt("id"));   // rajoute l'id de la BD
+                    git.setId(resultat.getLong("id"));   // rajoute l'id de la BD
                     myList.add(git);
                 } // while
                 if (pStatement != null) pStatement.close();
@@ -79,7 +79,7 @@ public class DBGithuberDAO implements GithuberDAO  {
 
             String strGetId="SELECT id FROM `githuber` WHERE github_id = ?;";
             String strKillGit="DELETE FROM `githuber` WHERE `id` = ";
-            Integer id=null;
+            Long id=null;
             //DbConnectionFactory dbFactory= new DbConnectionFactory();
             //Connection cnx = dbFactory.openConnection();
             Connection cnx = getCnx();
@@ -90,7 +90,7 @@ public class DBGithuberDAO implements GithuberDAO  {
                     pStatement.setString(1,gitId);
                     resultat = pStatement.executeQuery();
                     if (resultat.next()) {
-                        id = resultat.getInt("id");
+                        id = resultat.getLong("id");
                     }
                     // Delete by id
                     pStatement = (PreparedStatement) cnx.prepareStatement(strKillGit+ id +";");

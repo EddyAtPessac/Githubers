@@ -35,7 +35,7 @@ public class GithubersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         slf4jLogger.info("************* Do get servlet ***************");
         for (Githuber gt : githuberServObj.getAllGithubers() ) {
-            slf4jLogger.info(gt.getName());
+            //slf4jLogger.info(gt.getName());
         };
         request.setAttribute("gitlist", githuberServObj.getAllGithubers());
             //slf4jLogger.info(githuberServObj.getAllGithubers().get(2).getName().toString());

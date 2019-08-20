@@ -62,7 +62,7 @@ public class DBGithuberDAO implements GithuberDAO  {
                             resultat.getString("login"), resultat.getString("github_id"),
                             resultat.getString("avatar_url" )
                     );
-                    git.setId(resultat.getLong("id"));   // rajoute l'id de la BD
+                    //git.setId(resultat.getLong("id"));   // rajoute l'id de la BD
                     myList.add(git);
                 } // while
                 if (pStatement != null) pStatement.close();

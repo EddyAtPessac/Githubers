@@ -8,10 +8,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="githuber")
-
 public class Githuber {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @Column(name="github_id")
     private String gitId;
@@ -26,7 +27,7 @@ public class Githuber {
 
 
     @JsonCreator
-    public Githuber(@JsonProperty("name") String name, @JsonProperty("email")String email,
+     public Githuber(@JsonProperty("name") String name, @JsonProperty("email")String email,
                     @JsonProperty("login") String login, @JsonProperty("id") String gitId,
                     @JsonProperty("avatar_url")String avatarUrl) {
         this.name = name;

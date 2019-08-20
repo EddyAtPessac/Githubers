@@ -1,67 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://java.sun.com/xml/ns/persistence" version="1.0"
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-               http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-    <persistence-unit name="GitPersist" transaction-type="JTA">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <jta-data-source>java:/jdbc/myDB</jta-data-source>
-        <!--    <jta-data-source>java:/jdbc/myDB</jta-data-source> -->
-        <!--    <exclude-unlisted-classes>false</exclude-unlisted-classes>-->
-
-    <!-- Hibernate properties -->
-    <properties>
-        <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-        <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
-        <property name="hibernate.connection.charSet" value="UTF-8"/>
-        <property name="hibernate.validator.apply_to_ddl" value="false"/>
-        <property name="hibernate.validator.autoregister_listeners" value="false"/>
-        <property name="hibernate.show_sql" value="false"/>
-<!--
-        <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
-        <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.SunONETransactionManagerLookup"/>
--->
-
-        <!-- Transaction props -->
-        <!-- Wildfly -->
-        <!--
-        <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform"/>
-        <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>
-        -->
-        <!-- Glassfish/Payara -->
- <!--       <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
-        <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.SunONETransactionManagerLookup"/>
--->
-    </properties>
-    </persistence-unit>
+              http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">   <persistence-unit name="GitPersist">
+    <jta-data-source>jdbc/myDB</jta-data-source>
+</persistence-unit>
 </persistence>
 
-<!--    <properties>
-        <property name="hibernate.dialect" value=""/>
-        <property name="hibernate.dialect.storage_engine" value="innodb"/>
-        <property name="hibernate.show_sql" value="false"/>
-        <property name="hibernate.use_outer_join" value="true"/>
-        <property name="hibernate.jdbc.use_scrollable_resultset" value="true"/>
 
-        <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
 
-        <property name="javax.persistence.jdbc.user" value="root"/>
-        <property name="javax.persistence.jdbc.password" value="root"/>
+<!--        <?xml version="1.0" encoding="UTF-8" standalone="no"?>-->
+<!--<persistence xmlns="http://java.sun.com/xml/ns/persistence"-->
+<!--             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0"-->
+<!--             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence-->
+<!--               http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">-->
+<!--<persistence-unit name="GitPersist" transaction-type="JTA">-->
+<!--    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+<!--    <jta-data-source>java:/jdbc/myDB</jta-data-source>-->
+<!--    &lt;!&ndash;    <jta-data-source>java:/jdbc/myDB</jta-data-source> &ndash;&gt;-->
+<!--    &lt;!&ndash;    <exclude-unlisted-classes>false</exclude-unlisted-classes>&ndash;&gt;-->
 
- -->       <!-- Session context -->
- <!--       <property name="hibernate.current_session_context_class" value="jta"/>
-        <property name="hibernate.transaction.auto_close_session" value="true"/>
--->
+<!--    &lt;!&ndash; Hibernate properties &ndash;&gt;-->
+<!--    <properties>-->
+<!--        <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>-->
+<!--        <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>-->
+<!--        <property name="hibernate.connection.charSet" value="UTF-8"/>-->
+<!--        <property name="hibernate.validator.apply_to_ddl" value="false"/>-->
+<!--        <property name="hibernate.validator.autoregister_listeners" value="false"/>-->
+<!--        <property name="hibernate.show_sql" value="false"/>-->
 
-            <!--
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/live_coding" />
+<!--        &lt;!&ndash;-->
+<!--                <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>-->
+<!--                <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.SunONETransactionManagerLookup"/>-->
+<!--        &ndash;&gt;-->
 
-            <property name="hibernate.hbm2ddl.delimiter" value=";"/>
-            <property name="javax.persistence.schema-generation.database.action" value="none"/>
-            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
-            <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
-            <property name="javax.persistence.schema-generation.scripts.drop-target" value="scripts/drop-mysql.sql"/>
-            <property name="javax.persistence.schema-generation.scripts.create-target" value="scripts/schema-mysql.sql"/>
-            -->
+<!--        &lt;!&ndash; Transaction props &ndash;&gt;-->
+<!--        &lt;!&ndash; Wildfly &ndash;&gt;-->
+<!--        <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform"/>-->
+<!--        <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>-->
+<!--        &lt;!&ndash; Glassfish/Payara &ndash;&gt;-->
+<!--        &lt;!&ndash;       <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>-->
+<!--               <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.SunONETransactionManagerLookup"/>-->
+<!--       &ndash;&gt;-->
+<!--    </properties>-->
+<!--</persistence-unit>-->
+<!--</persistence>-->
 
+<!-- -->

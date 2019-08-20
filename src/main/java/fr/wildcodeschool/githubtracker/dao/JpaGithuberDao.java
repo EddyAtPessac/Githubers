@@ -29,7 +29,7 @@ public class JpaGithuberDao  implements GithuberDAO {
         return (myList);
     }
 
-    public void deleteGithuber(String gitId) {
+    public void deleteGithuber(String login) {
         // TODO delete githuber gitId from list;
     }
 

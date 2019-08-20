@@ -2,6 +2,7 @@ package fr.wildcodeschool.githubtracker.service;
 
 import fr.wildcodeschool.githubtracker.dao.GithuberDAO;
 import fr.wildcodeschool.githubtracker.dao.InDatabase;
+import fr.wildcodeschool.githubtracker.dao.Jpa;
 import fr.wildcodeschool.githubtracker.model.Githuber;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class GithubersService {
     // DumbGithuberDAO que l'on veut utiliser.
 
     @Inject
-    public GithubersService( @InDatabase  GithuberDAO gitDao) {
+    public GithubersService( @Jpa GithuberDAO gitDao) {
         this.gitDao = gitDao;
     }
      @Inject
@@ -46,11 +47,13 @@ public class GithubersService {
     }
 
     public void unTrack(String login) {
-
+        gitDao.deleteGithuber(login);
+/*
         Githuber git= getGithuber(login);
         if (null != git) {
             gitDao.deleteGithuber(git.getgitId());
         }
+*/
     }
 
     public Githuber getGithuber(String login) {

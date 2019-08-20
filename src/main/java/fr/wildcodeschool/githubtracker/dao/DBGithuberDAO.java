@@ -75,9 +75,9 @@ public class DBGithuberDAO implements GithuberDAO  {
        return myList;
     }
 
-    public void deleteGithuber(String gitId) {
+    public void deleteGithuber(String gitlog) {
 
-            String strGetId="SELECT id FROM `githuber` WHERE github_id = ?;";
+            String strGetId="SELECT id FROM `githuber` WHERE login = ?;";
             String strKillGit="DELETE FROM `githuber` WHERE `id` = ";
             Long id=null;
             //DbConnectionFactory dbFactory= new DbConnectionFactory();
@@ -87,7 +87,7 @@ public class DBGithuberDAO implements GithuberDAO  {
                 if (cnx != null) {
                     // Recup of id by gitId
                     pStatement = (PreparedStatement) cnx.prepareStatement(strGetId);
-                    pStatement.setString(1,gitId);
+                    pStatement.setString(1,gitlog);
                     resultat = pStatement.executeQuery();
                     if (resultat.next()) {
                         id = resultat.getLong("id");
